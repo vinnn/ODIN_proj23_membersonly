@@ -14,43 +14,86 @@
     <!-- <h1> CLUB </h1> -->
 
 
-    <div class="container">
+    <div class="container mt-4">
 
-        <% if (currentUser) { %>     
-            <div class="container">
-                <h1> <%= currentUser.firstName %> </h1>
-                <h1> <%= currentUser.lastName %> </h1>
+        <% if (currentUser) { %>
 
+            <div class="card mx-auto">
+                <div class="card-header">
+                    <h1> <%= currentUser.firstName + " " + currentUser.lastName %> </h1>
+                </div>
 
-                <div class="card-group" >
+                <!-- CARD-BODY - scrollable: overflow -->
+                <div class="card-body p-4" style="height: 500px; overflow: auto;">
+
+                    <% let prevUserId = "" %>
+                    <% let prevMsgDate = "" %>
+
                     <% messages.forEach( msg => { %>
 
-                        <div class="row row-cols-12">
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <%= msg.author.firstName + " " + msg.author.lastName %>
-                                </div>
-                                <div class="card-title">
-                                    <%= msg.title %>
-                                </div>
-                                <div class="card-body">
-                                    <%= msg.text %>
-                                </div>
-                                <div class="card-fotter">
-                                    <%= msg.time %>
-                                </div>
+                        <!-- DISPLAY ROW WITH NEW DATE -->
+                        <% if (msg.date !== prevMsgDate ) { %> 
+                            <div class="row small d-flex justify-content-center">
+                                <%= msg.date %>
                             </div>
+                        <% } %>
+
+                        <!-- DISPLAY MESSAGE ROW -->
+                        <div class="row">
+
+                            <!-- IF MESSAGE FROM SOMEONE ELSE -->
+                            <% if (!msg.author._id.equals(currentUser._id)) {  %>
+
+                                <div class="col-2">
+                                    <% if (msg.author._id !== prevUserId) { %>
+                                        <div class="px-2 me-2" style="border-radius:20%; border:2px solid red;">
+                                            <%= msg.author.firstName + " " + msg.author.lastName %> :
+                                        </div>
+                                    <% } %>
+                                </div>
+
+                                <div class="col-8 pe-2">
+                                    <div class="me-2" style="border-radius: 5px; border: 1px solid grey">
+                                        <div>
+                                            <%= msg.text %>
+                                        </div>                                    
+                                    </div>
+                                    <div class="d-flex justify-content-end me-2 mb-2">
+                                        <div class="small">
+                                            <%= msg.time_formatted %>
+                                        </div>
+                                    </div>   
+                                </div>
+
+                            <% } else { %>
+
+                                <div class="d-flex justify-content-end">
+                                    <div class="col-8 ps-2">
+                                        <div class="me-2 text-end" style="border-radius: 5px; border: 1px solid grey">
+                                            <div>
+                                                <%= msg.text %>
+                                            </div>                                    
+                                        </div>
+                                        <div class="d-flex justify-content-start me-2 mb-2">
+                                            <div class="small">
+                                                <%= msg.time_formatted %>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>
+
+                            <% } %>
+                 
 
                         </div>
 
+                        <% prevUserId = msg.author._id %>
+                        <% prevMsgDate = msg.date %>
                     <% }) %>
 
-
-
-
-
                 </div>
+
+        
 
 
                 <div class="container">
