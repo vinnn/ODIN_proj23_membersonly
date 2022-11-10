@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body>
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+
+    <!-- <h1><%= title %></h1> -->
+    <!-- <h1> CLUB </h1> -->
+
+
+    <div class="container">
+
+        <% if (currentUser) { %>     
+            <div class="container">
+                <h1> <%= currentUser.firstName %> </h1>
+                <h1> <%= currentUser.lastName %> </h1>
+
+
+                <div class="card-group" >
+                    <% messages.forEach( msg => { %>
+
+                        <div class="row row-cols-12">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <%= msg.author.firstName + " " + msg.author.lastName %>
+                                </div>
+                                <div class="card-title">
+                                    <%= msg.title %>
+                                </div>
+                                <div class="card-body">
+                                    <%= msg.text %>
+                                </div>
+                                <div class="card-fotter">
+                                    <%= msg.time %>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    <% }) %>
+
+
+
+
+
+                </div>
+
+
+                <div class="container">
+                    <form method="POST" action="/new-message">
+                        <label class="form-label" for="msg-title">Title</label>
+                        <input class="form-control" id="msg-title" type="text" name="title"/>
+                        <label class="form-label" for="msg-text">Message</label>
+                        <input class="form-control" id="msg-text" type="text" name="text"/>        
+                        <button class="btn btn-primary" type="submit">Send</button>       
+                    </form>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <% } else { %>
+            <h2> Please Login </h2>
+        <% } %>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>
+
+

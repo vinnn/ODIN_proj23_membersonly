@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('./partials/head'); %>
+</head>
+
+<body>
+  <header>
+    <%- include('./partials/header'); %>
+  </header>  
+  
+  <h1><%= title %></h1>
+
+  <form method="POST" action="">
+    
+      <label for="first-name">First Name</label> 
+      <input id="first-name" type="text" name="firstName"/>
+      <label for="last-name">Last Name</label> 
+      <input id="last-name" type="text" name="lastName"/>   
+      <label for="username">Username (email)</label> 
+      <input id="username" type="text" name="username"/>
+      <label for="password">Password</label> 
+      <input id="password" type="text" name="password"/>
+      <label for="passwordbis">Confirm Password</label> 
+      <input id="passwordbis" type="text" name="passwordbis"/>
+    
+      <button type="submit">Submit</button>
+  </form>
+
+  <% if (errorsArray) { %>
+    <ul>
+    <% errorsArray.forEach( error => { %>
+      <li> ERROR: <%= error.msg %> </li>
+    <% }) %>
+    </ul>
+  <% } %>
+
+  <footer>
+    <%- include('./partials/footer'); %>
+  </footer>
+
+</body>
+
+</html>

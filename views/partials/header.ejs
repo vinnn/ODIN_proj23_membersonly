@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand navbar-dark text-bg-primary">
+    <div class="container">
+
+        <a class="navbar-brand" href="/">MembersOnly Logo</a>
+
+        <% if (currentUser) { %>
+            <ul class="navbar-nav">
+                <li class="navbar-item">
+                    <%= currentUser.firstName %>    
+                    <%= (currentUser.member? "Member" : "(Guest Only)") %> 
+                    <%= (currentUser.admin? "Admin" : "") %> 
+                </li>
+            </ul>
+        <% } %>
+
+
+        <ul class="navbar-nav">
+
+            <% if (currentUser) { %>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/messageboard">Message Board</a>
+                </li>
+
+            <% } %>
+
+        </ul>
+
+        <ul class="navbar-nav">
+
+            <% if (currentUser) { %>
+
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/join">Join the Club</a>
+                </li>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+
+            <% } else { %>
+
+                <li class="navbar-item">
+                    <a class="nav-link" href="/login">Log In</a>
+                </li>                
+            
+            <% } %>
+
+
+        </ul>
+
+
+    </div>
+
+</nav>

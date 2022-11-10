@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body>
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+
+
+    <div class="container">
+        <h1><%= title %></h1>
+        
+        <form novalidate method="POST" action="">
+            <div class="form-group">
+                <label for="username">Username (email)</label> 
+                <input class="form-control" id="username" type="email" name="username" placeholder="Enter email" required/>
+            </div>
+    
+            <div class="form-group">
+                <label for="password">Password</label> 
+                <input class="form-control" id="password" type="password" name="password" placeholder="Password" required/>
+            </div>
+     
+            <button class="btn btn-primary" type="submit">Log In</button>
+        </form>
+    </div>
+
+
+    <div class="container">
+        <h3>No Account?</h3>
+        <a class="btn btn-primary" href="/sign-up">Sign Up</a>
+    </div>
+
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+
+
+    <script>
+        // implement some form validation
+        const form = document.querySelector("form")
+        form.addEventListener("submit", e => {
+            if (!form.checkValidity()) {
+                e.preventDefault()
+            }
+            form.classList.add("was-validated")
+        })
+    </script>
+
+
+
+
+
+</body>
+</html>
+
