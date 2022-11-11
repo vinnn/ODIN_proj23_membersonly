@@ -1,0 +1,79 @@
+
+<!-- PARTIAL THAT DISPLAYS A MESSAGE UNIT:
+    - row with date (if new date)
+    - row with author (if different from prev msg author) + message 
+    - row with time (if member) 
+-->
+
+<!-- 
+- logStatus = loggedout | loggedin | member
+- authorLogged = true | false
+
+- msg
+- prevAuthorId
+- prevMsgDate 
+-->
+
+
+    <!-- NEW DATE -->
+    <% if (msg.date !== prevMsgDate ) { %> 
+        <div class="row small d-flex justify-content-center">
+            <%= msg.date %>
+        </div>
+    <%}%>
+
+
+    <!-- MESSAGE ROW -->
+    <div class="row">
+        <!-- IF USER IS AUTHOR OF THE MSG -->
+        <% if (currentUser && msg.author._id.equals(currentUser._id)) { %>
+
+            <div class="d-flex justify-content-end">
+                <div class="col-8 ps-2">
+                    <div class="me-2 text-end" style="border-radius: 5px; border: 1px solid grey">
+                        <div>
+                            <%= msg.text %>
+                        </div>                                    
+                    </div>
+
+                    <div class="d-flex justify-content-start me-2 mb-2">
+                        <div class="small">
+                            <%= msg.time_formatted %>
+                        </div>
+                    </div>   
+
+                </div>
+            </div>
+
+        <!-- IF USER IS NOT HE AUTHOR OF THE MSG -->
+        <% } else { %> 
+            <div class="col-2">
+                <% if (msg.author._id !== prevAuthorId) { %>
+                    <div class="px-2 me-2" style="border-radius:20%; border:2px solid red;">
+                        <%= currentUser? msg.author.firstName + " " + msg.author.lastName : "hidden author" %> :
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="col-8 pe-2">
+                <div class="me-2" style="border-radius: 5px; border: 1px solid grey">
+                    <div>
+                        <%= msg.text %>
+                    </div>                                    
+                </div>
+                <div class="d-flex justify-content-end me-2 mb-2">
+                    <div class="small">
+                        <%= currentUser? msg.time_formatted : "hidden time"%>
+                    </div>
+                </div>   
+            </div>
+
+        <%}%>
+             
+    </div>
+
+
+
+
+
+

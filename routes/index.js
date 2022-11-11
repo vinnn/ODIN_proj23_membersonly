@@ -3,9 +3,8 @@ var router = express.Router();
 
 // Require controller modules.
 const user_controller = require("../controllers/userController");
-
 const message_controller = require("../controllers/messageController");
-
+const secretcode_controller = require("../controllers/secretcodeController");
 
 
 
@@ -56,13 +55,7 @@ router.get('/join', user_controller.join_get);
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // POST Join form
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-router.post('/join', user_controller.join_post);
-
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// GET Messageboard page
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-router.get('/messageboard', user_controller.messageboard_get);
+router.post('/join/:id', user_controller.join_post);
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // POST Message form
@@ -71,9 +64,11 @@ router.post('/new-message', message_controller.message_create_post);
 
 
 
-
-
-
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// TEMPORARY ADMIN ROUTE - POST ADMIN CODE
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+router.get('/secretcodes', secretcode_controller.secretcode_create_get);
+router.post('/secretcodes/:code', secretcode_controller.secretcode_create_post);
 
 
 

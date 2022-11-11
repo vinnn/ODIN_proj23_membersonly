@@ -1,47 +1,35 @@
 <nav class="navbar navbar-expand navbar-dark text-bg-primary">
     <div class="container">
 
-        <a class="navbar-brand" href="/">MembersOnly Logo</a>
+        <a class="navbar-brand" href="/">MembersOnly</a>
 
         <% if (currentUser) { %>
             <ul class="navbar-nav">
                 <li class="navbar-item">
-                    <%= currentUser.firstName %>    
-                    <%= (currentUser.member? "Member" : "(Guest Only)") %> 
-                    <%= (currentUser.admin? "Admin" : "") %> 
+                    <%= (currentUser.member? "Member" : "(limited access)") %> 
+                    <%= (currentUser.admin? "ADMIN RIGHTS" : "") %> 
                 </li>
             </ul>
         <% } %>
 
-
-        <ul class="navbar-nav">
-
-            <% if (currentUser) { %>
-
-                <li class="navbar-item">
-                    <a class="nav-link" href="/messageboard">Message Board</a>
-                </li>
-
-            <% } %>
-
-        </ul>
-
         <ul class="navbar-nav">
 
             <% if (currentUser) { %>
 
 
                 <li class="navbar-item">
-                    <a class="nav-link" href="/join">Join the Club</a>
+                    <a class="nav-link" href="/join">
+                        <%= (currentUser.member? "" : "Join the Club") %>
+                    </a>
                 </li>
 
-                <li class="navbar-item">
+                <li class="navbar-item" style="margin-left: 8rem;">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
 
             <% } else { %>
 
-                <li class="navbar-item">
+                <li class="navbar-item" style="margin-left: 8rem;">
                     <a class="nav-link" href="/login">Log In</a>
                 </li>                
             

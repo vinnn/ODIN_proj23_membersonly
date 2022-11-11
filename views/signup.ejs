@@ -10,23 +10,51 @@
     <%- include('./partials/header'); %>
   </header>  
   
-  <h1><%= title %></h1>
 
-  <form method="POST" action="">
-    
-      <label for="first-name">First Name</label> 
-      <input id="first-name" type="text" name="firstName"/>
-      <label for="last-name">Last Name</label> 
-      <input id="last-name" type="text" name="lastName"/>   
-      <label for="username">Username (email)</label> 
-      <input id="username" type="text" name="username"/>
-      <label for="password">Password</label> 
-      <input id="password" type="text" name="password"/>
-      <label for="passwordbis">Confirm Password</label> 
-      <input id="passwordbis" type="text" name="passwordbis"/>
-    
-      <button type="submit">Submit</button>
+
+
+  <div class="container">
+
+    <h1><%= title %></h1>
+
+    <form method="POST" action="">
+      <div class="form-group mb-2">
+        <label for="first-name">First Name</label> 
+        <input class="form-control" id="first-name" type="text" name="firstName"/>
+      </div>
+      <div class="form-group mb-2">
+        <label for="last-name">Last Name</label> 
+        <input class="form-control" id="last-name" type="text" name="lastName"/>  
+      </div>
+      <div class="form-group mb-2">
+        <label for="username">Username (email)</label> 
+        <input class="form-control" id="username" type="text" name="username"/>        
+      </div>
+      <div class="form-group mb-2">
+        <label for="password">Password</label> 
+        <input class="form-control" id="password" type="text" name="password" placeholder="Enter password"/>
+      </div>
+      <div class="form-group mb-2">
+        <label for="passwordbis">Confirm Password</label> 
+        <input class="form-control" id="passwordbis" type="text" name="passwordbis" placeholder="Confirm password"/>
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="admin">Admin Rights</label>
+        <input class="form-check-input" id="admin" type="checkbox" name="adminCheck"/>
+        <input class="form-control" id="admin-code" type="password" name="adminCode" placeholder="Enter admin code"/>
+      </div>
+
+
+
+      <button class="btn btn-primary" type="submit">Submit</button>
   </form>
+
+  </div>
+
+
+
+
 
   <% if (errorsArray) { %>
     <ul>

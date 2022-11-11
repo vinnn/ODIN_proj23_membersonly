@@ -1,0 +1,34 @@
+
+<!-- PARTIAL THAT DISPLAYS A MESSAGE UNIT:
+    - row with date (if new date)
+    - row with author (if different from prev msg author) + message 
+    - row with time (if member) 
+-->
+
+
+
+<!-- MESSAGE ROW -->
+<div class="row">
+
+    <div class="col-2">
+        <% if (msg.author._id !== prevAuthorId) { %>
+            <div class="px-2 me-2" style="background-color: grey; border-radius:20%; border:2px solid red;">
+                hidden author :
+            </div>
+        <% } %>
+    </div>
+
+    <div class="col-8 pe-2">
+        <div class="me-2" style="border-radius: 5px; border: 1px solid grey">
+            <div>
+                <%= msg.text %>
+            </div>                                    
+        </div>
+        <div class="d-flex justify-content-end me-2 mb-2">
+            <div class="small px-4" style="background-color: grey; border-radius: 5%;">
+                hidden time
+            </div>
+        </div>   
+    </div>             
+</div>
+
