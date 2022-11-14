@@ -12,11 +12,11 @@ const UserSchema = new Schema({
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 });
 
-// Virtual for user's URL
-// UserSchema.virtual("url").get(function () {
-//   // We don't use an arrow function as we'll need the this object
-//   return `/catalog/user/${this._id}`;
-// });
+// Virtual for user's String ID
+UserSchema.virtual("stringId").get(function () {
+  // We don't use an arrow function as we'll need the this object
+  return `${this._id.toHexString()};`;
+});
 
 // Export model
 module.exports = mongoose.model("User", UserSchema);

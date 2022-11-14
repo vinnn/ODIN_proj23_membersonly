@@ -20,8 +20,8 @@
 
                 <!-- CARD-HEADER -->
                 <div class="card-header">
-                    <h1> <% if (user) { %>
-                        <%= user.firstName + " " + user.lastName %>
+                    <h1> <% if (currentUser) { %>
+                        <%= currentUser.firstName + " " + currentUser.lastName %>
                     <% } else { %>
                         <a href="/login" class="btn btn-primary">Log In</a>
                     <% } %>
@@ -37,18 +37,18 @@
                     <% messages.forEach( msg => { %>
 
                         <!-- IF USER IS LOGGED OUT -->
-                        <% if (!user) { %>
-                            <%- include('./partials/message_loggedOut', {user: user, msg: msg, prevAuthorId: prevAuthorId }); %>
+                        <% if (!currentUser) { %>
+                            <%- include('./partials/message_loggedOut', {msg: msg, prevAuthorId: prevAuthorId }); %>
                         <% } %>
 
                         <!-- IF USER IS A LOGGED IN (BUT NOT A MEMBER)-->          
-                        <% if (user && !user.member) { %>   
-                            <%- include('./partials/message_loggedIn', {user: user, msg: msg, prevAuthorId: prevAuthorId }); %>
+                        <% if (currentUser && !currentUser.member) { %>   
+                            <%- include('./partials/message_loggedIn', {msg: msg, prevAuthorId: prevAuthorId }); %>
                         <% } %>
 
                         <!-- IF USER IS LOGGED IN AND A MEMBER -->
-                        <% if (user && user.member) { %>   
-                            <%- include('./partials/message_loggedMember', {user: user, msg: msg, prevAuthorId: prevAuthorId, prevMsgDate: prevMsgDate }); %>
+                        <% if (currentUser && currentUser.member) { %>   
+                            <%- include('./partials/message_loggedMember', {msg: msg, prevAuthorId: prevAuthorId, prevMsgDate: prevMsgDate }); %>
                         <%}%>    
 
                         <% prevAuthorId = msg.author._id %>
@@ -60,7 +60,7 @@
                 <!-- CARD-FOOTER -->
                 <div class="card-footer">
 
-                    <% if (user) { %>
+                    <% if (currentUser) { %>
                         <form method="POST" action="/new-message">
                             <div class="input-group">
                                 <input class="form-control" id="msg-text" type="text" name="text" placeholder="Write a message..."/>        

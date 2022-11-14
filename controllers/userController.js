@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Message = require("../models/message");
 const Secretcode = require("../models/secretcode");
 
+// const mongoose = require('mongoose');
 const async = require("async");
 const { body, validationResult } = require("express-validator");
 const passport = require("passport");
@@ -315,55 +316,31 @@ exports.join_post = [
                 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                
                 let isMember = false;
 
-                bcrypt.compare(req.body.code, res2.secretcodes.membercode, async (err, res3) => {
+                bcrypt.compare(req.body.code, res2.secretcodes.membercode, (err, res3) => {
                     if (err) {
                         return next(err);
                     }
                     if (res3) {
                         // passwords match!
                         // save the updated User record with the member = true:
-                        const updatedUser = new User({
-                            _id: res2.usertoupdate._id,
-                            firstName: res2.usertoupdate.firstName,
-                            lastName: res2.usertoupdate.lastName,
-                            username: res2.usertoupdate.username,
-                            password: res2.usertoupdate.password,
-                            member: true,
-                            admin: res2.usertoupdate.isAdmin,
-                            messages: res2.usertoupdate.messages,
-                        });
+                        res2.usertoupdate.member = true;
 
- 
+                        res2.usertoupdate.save().then( () => {
+                                res1.redirect('/');
 
-
-                            // KKKKKk$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                            // KKKKKk$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                  
-                            // KKKKKk$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                         
-   
-                            User.findByIdAndUpdate(req.params.id, updatedUser, {}).then((err, res4) => { 
-                            if (err) {
-                                return next(err);
+                                // res1.render("home", {
+                                //     title: "Home",
+                                //     user: res2.usertoupdate,
+                                //     messages: res2.usertoupdate.messages,
+                                // });
                             }
-                            if (res4) {
-                                res1.render("home", {
-                                    title: "Home",
-                                    user: updatedUser,
-                                    messages: res2.messages,
-                                });
-                            }
-
-                            
-                            })
-                            // KKKKKk$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                            // KKKKKk$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                  
-                            // KKKKKk$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$              
-
+                        )
                 
                     } else {
                         // passwords do not match!
                         console.log("MEMBER CODE DOES NOT MATCH!!!")
                         // isMember = false;
-                        res.render("join", {
+                        res1.render("join", {
                             title: "Try again later (code does not match)",
                             errorsArray: [],
                         });
@@ -377,14 +354,6 @@ exports.join_post = [
         )
     }
 ]
-
-
-
-
-
-
-
-
 
 
 

@@ -20,7 +20,7 @@
 <!-- MESSAGE ROW -->
 <div class="row">
     <!-- IF USER IS AUTHOR OF THE MSG -->
-    <% if (currentUser && msg.author._id.equals(currentUser._id)) { %>
+    <% if (user && msg.author.stringId === user.stringId) { %>
 
         <div class="d-flex justify-content-end">
             <div class="col-8 ps-2">
@@ -42,7 +42,7 @@
     <!-- IF USER IS NOT HE AUTHOR OF THE MSG -->
     <% } else { %> 
         <div class="col-2">
-            <% if (msg.author._id !== prevAuthorId) { %>
+            <% if (msg.author.stringId !== prevAuthorId) { %>
                 <div class="px-2 me-2" style="background-color: grey; border-radius:20%; border:2px solid red;">
                     hidden author :
                 </div>

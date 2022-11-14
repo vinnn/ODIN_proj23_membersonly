@@ -26,7 +26,7 @@
     <!-- MESSAGE ROW -->
     <div class="row">
         <!-- IF USER IS AUTHOR OF THE MSG -->
-        <% if (currentUser && msg.author._id.equals(currentUser._id)) { %>
+        <% if (user && msg.author._id.equals(user._id)) { %>
 
             <div class="d-flex justify-content-end">
                 <div class="col-8 ps-2">
@@ -50,7 +50,7 @@
             <div class="col-2">
                 <% if (msg.author._id !== prevAuthorId) { %>
                     <div class="px-2 me-2" style="border-radius:20%; border:2px solid red;">
-                        <%= currentUser? msg.author.firstName + " " + msg.author.lastName : "hidden author" %> :
+                        <%= user? msg.author.firstName + " " + msg.author.lastName : "hidden author" %> :
                     </div>
                 <% } %>
             </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="d-flex justify-content-end me-2 mb-2">
                     <div class="small">
-                        <%= currentUser? msg.time_formatted : "hidden time"%>
+                        <%= user? msg.time_formatted : "hidden time"%>
                     </div>
                 </div>   
             </div>

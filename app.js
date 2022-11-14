@@ -96,6 +96,12 @@ passport.deserializeUser(function(id, done) {
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 const setCurrentUser = function (req, res, next) {
   res.locals.currentUser = req.user;
+  console.log("in setCurrentUser : ", req.user);
+  if (req.user) {
+    console.log("setCurrentUser._id : ", req.user._id);
+    console.log("setCurrentUser.stringId : ", req.user.stringId);
+  }
+
   next();
 };
 
