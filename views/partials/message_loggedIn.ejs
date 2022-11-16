@@ -20,7 +20,7 @@
 <!-- MESSAGE ROW -->
 <div class="row">
     <!-- IF USER IS AUTHOR OF THE MSG -->
-    <% if (user && msg.author.stringId === user.stringId) { %>
+    <% if (user && msg.author._id.equals(user._id)) { %>
 
         <div class="d-flex justify-content-end">
             <div class="col-8 ps-2">
@@ -42,7 +42,7 @@
     <!-- IF USER IS NOT HE AUTHOR OF THE MSG -->
     <% } else { %> 
         <div class="col-2">
-            <% if (msg.author.stringId !== prevAuthorId) { %>
+            <% if (msg.author._id !== prevAuthorId) { %>
                 <div class="px-2 me-2" style="background-color: grey; border-radius:20%; border:2px solid red;">
                     hidden author :
                 </div>
@@ -51,8 +51,14 @@
 
         <div class="col-8 pe-2">
             <div class="me-2" style="border-radius: 5px; border: 1px solid grey">
-                <div>
-                    <%= msg.text %>
+                <div class="d-flex justify-content-between">
+                    <div> <%= msg.text %> </div>
+                    <form method="POST" action="delete/<%= msg._id %>" class="d-flex">
+
+                        <button type="submit" class="btn btn-danger" style="font-size: 12px; height: 24px; padding: 3px;"> DELETE </button>
+
+                    </form>
+
                 </div>                                    
             </div>
             <div class="d-flex justify-content-end me-2 mb-2">

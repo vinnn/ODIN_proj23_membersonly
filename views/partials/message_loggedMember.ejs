@@ -31,9 +31,15 @@
             <div class="d-flex justify-content-end">
                 <div class="col-8 ps-2">
                     <div class="me-2 text-end" style="border-radius: 5px; border: 1px solid grey">
-                        <div>
-                            <%= msg.text %>
-                        </div>                                    
+                        
+                        <div class="d-flex justify-content-between">
+                            <div> <%= msg.text %> </div>
+                            <form method="POST" action="delete/<%= msg._id %>" class="d-flex">
+        
+                                <button type="submit" class="btn btn-danger" style="font-size: 12px; height: 24px; padding: 3px;"> DELETE </button>        
+                            </form>
+                        </div>                         
+
                     </div>
 
                     <div class="d-flex justify-content-start me-2 mb-2">
@@ -45,7 +51,7 @@
                 </div>
             </div>
 
-        <!-- IF USER IS NOT HE AUTHOR OF THE MSG -->
+        <!-- IF USER IS NOT THE AUTHOR OF THE MSG -->
         <% } else { %> 
             <div class="col-2">
                 <% if (msg.author._id !== prevAuthorId) { %>
@@ -57,9 +63,17 @@
 
             <div class="col-8 pe-2">
                 <div class="me-2" style="border-radius: 5px; border: 1px solid grey">
-                    <div>
-                        <%= msg.text %>
-                    </div>                                    
+
+                    <div class="d-flex justify-content-between">
+                        <div> <%= msg.text %> </div>
+                        <form method="POST" action="delete/<%= msg._id %>" class="d-flex">
+    
+                            <button type="submit" class="btn btn-danger" style="font-size: 12px; height: 24px; padding: 3px;"> DELETE </button>
+    
+                        </form>
+    
+                    </div> 
+
                 </div>
                 <div class="d-flex justify-content-end me-2 mb-2">
                     <div class="small">

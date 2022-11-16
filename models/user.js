@@ -13,10 +13,10 @@ const UserSchema = new Schema({
 });
 
 // Virtual for user's String ID
-UserSchema.virtual("stringId").get(function () {
-  // We don't use an arrow function as we'll need the this object
-  return `${this._id.toHexString()};`;
-});
+// UserSchema.virtual("stringId").get(function () {
+//   // We don't use an arrow function as we'll need the this object
+//   return `${this._id.toHexString()};`;
+// });
 
 // Export model
 module.exports = mongoose.model("User", UserSchema);

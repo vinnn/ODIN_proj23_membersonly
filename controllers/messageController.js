@@ -46,5 +46,43 @@ exports.message_create_post = [
 
 
 
+
+// Create New Message - POST create message form
+exports.message_delete_post = (req, res, next) => {
+  // Get the message to delete
+  async.parallel(
+    {
+        messagetodelete(callback) {
+            Message.findById( req.params.id )
+            .populate("author")
+            .exec(callback);
+        },
+    },
+    (err, results, next2) => {
+        if (err) {
+            return next(err);
+        }
+
+        results.messagetodelete.delete().then( () => {
+
+        // passportjs checks if there is a user
+        // logged in (by checking the cookies that
+        // come with the 'req' object) 
+        console.log("deleted?");
+        // return;
+        //  next2();
+        
+        res.redirect('/');
+  
+        });
+    }
+  )
+}
+
+
+
+
+
+
 // for this app, no update 
 

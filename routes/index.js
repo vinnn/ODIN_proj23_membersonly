@@ -63,6 +63,16 @@ router.post('/join/:id', user_controller.join_post);
 router.post('/new-message', message_controller.message_create_post);
 
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// GET Delete Message page
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// router.get('/delete/:id', message_controller.message_delete_get);
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// POST Delete Message
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+router.post('/delete/:id', message_controller.message_delete_post);
+
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // TEMPORARY ADMIN ROUTE - POST ADMIN CODE
