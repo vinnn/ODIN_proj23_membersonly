@@ -7,8 +7,6 @@ const async = require("async");
 const { body, validationResult } = require("express-validator");
 const passport = require("passport");
 
-// const LocalStrategy = require("passport-local").Strategy;
-// const session = require("express-session");
 const bcrypt = require('bcryptjs');
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,11 +61,9 @@ exports.user_create_post = [
       .trim()
       .escape(),
 
-
     (req, res, next) => {
 
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
         // There are errors. Render login form again 
             res.render("signup", {
@@ -93,27 +89,25 @@ exports.user_create_post = [
                     return next(err);
                 }
 
-                // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 // Check if admin rights allowed (compare admin pwd with secretcodes.admincode)
-                // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                
+                // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%            
                 let isAdmin = false;
                 if (req.body.adminCheck === "on") {
                     bcrypt.compare(req.body.adminCode, results.secretcodes.admincode, (err, res) => {
                         if (res) {
                             // passwords match! log user in
-                            console.log("ADMIN CODE MATCHES!!!")
                             isAdmin = true;
                         } else {
                             // passwords do not match!
-                            console.log("ADMIN CODE DOES NOT MATCH!!!")
                             isAdmin = false;
                         }
                     })
                 }
 
-                // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 // Encrypt the new user password and save the record in the db
-                // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                
+                //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
                     // if err:
                     if (err) {
@@ -180,7 +174,6 @@ exports.home_get = (req, res) => {
 };
 
 
-
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // LOGIN - GET login form
@@ -229,7 +222,6 @@ exports.login_post = [
         successRedirect: "/",
         failureRedirect: "/login"
     })
-
 ]
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -327,12 +319,6 @@ exports.join_post = [
 
                         res2.usertoupdate.save().then( () => {
                                 res1.redirect('/');
-
-                                // res1.render("home", {
-                                //     title: "Home",
-                                //     user: res2.usertoupdate,
-                                //     messages: res2.usertoupdate.messages,
-                                // });
                             }
                         )
                 
@@ -347,27 +333,9 @@ exports.join_post = [
                         return;
                     }
                 })
-
-
-    
             }
         )
     }
 ]
-
-
-
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// SIGNUP - GET create user form
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-exports.user_join_get = (req, res) => {
-    res.render("join", {
-        title: "Join the Club",
-        errorsArray: [],
-    });
-};
 
 

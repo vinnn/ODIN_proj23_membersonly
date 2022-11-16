@@ -2,13 +2,13 @@ const Secretcode = require("../models/secretcode");
 
 const async = require("async");
 const { body, validationResult } = require("express-validator");
-const passport = require("passport");
-
 const bcrypt = require('bcryptjs');
-const secretcode = require("../models/secretcode");
 
-
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // GET create admin code form
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 exports.secretcode_create_get = (req, res) => {
     res.render("secretcodes", {
         title: "Secret Codes",
@@ -16,8 +16,11 @@ exports.secretcode_create_get = (req, res) => {
     });
 };
 
-
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // POST create admin code form
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 exports.secretcode_create_post = [
 
     body("newCode", "Code must not be empty")
@@ -74,20 +77,21 @@ exports.secretcode_create_post = [
                                 membercode: results.secretcodes.membercode,
                             });
                             // update the record:
-                            Secretcode.findOneAndUpdate( { name: "codes" }, updatedsecretcode, {}, (err, therecord) => {
-                                if (err) {
-                                    return next(err);
+                            Secretcode.findOneAndUpdate( 
+                                { name: "codes" }, 
+                                updatedsecretcode, 
+                                {}, 
+                                (err, therecord) => {
+                                    if (err) {
+                                        return next(err);
+                                    }
+                                    // successful. Redirect to login page
+                                    res.redirect('/secretcodes');                                 
                                 }
-                                // successful. Redirect to login page
-                                res.redirect('/secretcodes');                                 
-                            })
-
- 
-        
+                            )
                         }
                     })
                 }
-
 
                 // IF MEMBER CODE TO BE UPDATED:
                 if (req.params.code == "member") {
@@ -102,7 +106,6 @@ exports.secretcode_create_post = [
                             });
                             return;
                         } else {
-        
                             // create the new record with updated code:
                             const updatedsecretcode = new Secretcode({
                                 _id: results.secretcodes._id,
@@ -111,29 +114,21 @@ exports.secretcode_create_post = [
                                 membercode: hashedCode,
                             });
                             // update the record:
-                            Secretcode.findOneAndUpdate( { name: "codes" }, updatedsecretcode, {}, (err, therecord) => {
-                                if (err) {
-                                    return next(err);
+                            Secretcode.findOneAndUpdate( 
+                                { name: "codes" }, 
+                                updatedsecretcode, 
+                                {}, 
+                                (err, therecord) => {
+                                    if (err) {
+                                        return next(err);
+                                    }
+                                    // successful. Redirect to login page
+                                    res.redirect('/secretcodes');                                 
                                 }
-                                // successful. Redirect to login page
-                                res.redirect('/secretcodes');                                 
-                            })
-
- 
-        
+                            )
                         }
                     })
                 }
-
-
-
-
-
-
-
-
-
-
             }
         )
     }

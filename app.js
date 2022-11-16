@@ -36,15 +36,10 @@ const db = mongoose.connection;
 // bind connection to error event (to get notification of connection errors)
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-
-
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // ROUTERS
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-
-
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // AUTH Passportjs: 'localStrategy' (ie username+password strategy) 
@@ -99,7 +94,6 @@ const setCurrentUser = function (req, res, next) {
   next();
 };
 
-
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // EXPRESS APP
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,7 +105,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // ADD MIDDLEWARE INTO THE REQUEST HANDLING CHAIN
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -121,9 +114,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // ------- auth
-app.use(session({secret: "cats", resave: false, saveUninitialized: true }));
+app.use(session({
+  secret: "cats", 
+  resave: false, 
+  saveUninitialized: true 
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
@@ -131,10 +127,8 @@ app.use(express.urlencoded({ extended: false }));
 // ------- locals.currentUser
 app.use(setCurrentUser);
 
-
 // -------- routers
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -153,3 +147,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+

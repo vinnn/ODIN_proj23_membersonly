@@ -1,22 +1,3 @@
-
-<!-- PARTIAL THAT DISPLAYS A MESSAGE UNIT:
-    - row with date (if new date)
-    - row with author (if different from prev msg author) + message 
-    - row with time (if member) 
--->
-
-<!-- 
-- logStatus = loggedout | loggedin | member
-- authorLogged = true | false
-
-- msg
-- prevAuthorId
-- prevMsgDate 
--->
-
-
-
-    
 <!-- MESSAGE ROW -->
 <div class="row">
     <!-- IF USER IS AUTHOR OF THE MSG -->
@@ -35,7 +16,6 @@
                         hidden time
                     </div>
                 </div>   
-
             </div>
         </div>
 
@@ -58,7 +38,6 @@
                         <button type="submit" class="btn btn-danger" style="font-size: 12px; height: 24px; padding: 3px;"> DELETE </button>
 
                     </form>
-
                 </div>                                    
             </div>
             <div class="d-flex justify-content-end me-2 mb-2">
@@ -67,9 +46,7 @@
                 </div>
             </div>   
         </div>
-
     <%}%>
-             
 </div>
 
 
