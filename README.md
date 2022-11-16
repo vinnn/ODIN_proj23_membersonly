@@ -11,6 +11,7 @@ This project is to practice the concepts learned in the Odin Project - Full Stac
 - Passport, bcryptjs, dotenv
 - MongoDB, mongoose
 - (HTML5, CSS, Javascript)
+- Bootstrap
 - Git/Github
 
 
