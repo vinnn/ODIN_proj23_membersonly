@@ -7,7 +7,7 @@
             <ul class="navbar-nav">
                 <li class="navbar-item">
                     <%= (currentUser.member? "Member" : "(limited access)") %> 
-                    <%= (currentUser.admin? "ADMIN RIGHTS" : "") %> 
+                    <%= (currentUser.member && currentUser.admin? "with Admin Rights" : "") %> 
                 </li>
             </ul>
         <% } %>
